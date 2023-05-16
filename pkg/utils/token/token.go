@@ -36,7 +36,7 @@ func TokenValid(c *gin.Context) error {
 	tokenString := ExtractToken(c)
 	_, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
 		return []byte(api_secret), nil
 	})
@@ -63,25 +63,21 @@ func ExtractTokenID(c *gin.Context) (uint, error) {
 
     viper.ReadInConfig()
     api_secret := viper.Get("API_SECRET").(string)
-	fmt.Println("api_secret:", api_secret)
 
 	tokenString := ExtractToken(c)
-	fmt.Println("tokenString:", tokenString)
 
 	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
 	
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
 		return []byte(api_secret), nil
 	})
 
-	fmt.Println("token:", token)
 	if err != nil {
 		return 0, err
 	}
 	claims, ok := token.Claims.(jwt.MapClaims)
-	fmt.Println("claims[user_id]:", claims["user_id"])
 	if ok && token.Valid {
 		uid, err := strconv.ParseUint(fmt.Sprintf("%.0f", claims["user_id"]), 10, 32)
 		if err != nil {
