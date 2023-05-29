@@ -10,14 +10,14 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-type AddUserRequestBody struct {
+type AddRequestBody struct {
     UserName       string `json:"username"`
     Password       string `json:"password"`
     Email       string `json:"email"`
 }
 
 func (h handler) AddUser(ctx *gin.Context) {
-    body := AddUserRequestBody{}
+    body := AddRequestBody{}
 
     if err := ctx.BindJSON(&body); err != nil {
         ctx.AbortWithError(http.StatusBadRequest, err)
