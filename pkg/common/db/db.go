@@ -1,18 +1,15 @@
 package db
 
 import (
+	"car_repair_api_go/pkg/common/models"
+	"context"
+	"fmt"
 	"log"
 
-	"car_repair_api_go/pkg/common/models"
-
+	"github.com/redis/go-redis/v9"
+	"github.com/spf13/viper"
 	"gorm.io/driver/postgres"
-
 	"gorm.io/gorm"
-
-    "context"
-    "github.com/redis/go-redis/v9"
-    "fmt"
-
 )
 
 func Init(url string) *gorm.DB {
@@ -31,8 +28,10 @@ func Init(url string) *gorm.DB {
 var ctx = context.Background()
 
 func SetApiVersionCache() {
+
+    redis_addr := viper.Get("REDIS_ADDR").(string)
     rdb := redis.NewClient(&redis.Options{
-        Addr:     "redis:6379",
+        Addr:     redis_addr,
         Password: "",
         DB:       0,
     })

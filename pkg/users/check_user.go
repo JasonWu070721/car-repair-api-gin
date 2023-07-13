@@ -24,8 +24,6 @@ func (h handler) CheckUser(ctx *gin.Context) {
     username := checkUserInput.UserName
     users := []models.User{}
 
-
-
 	err := h.DB.Where("user_name = ?", username).Find(&users)
 
 	if err != nil {
