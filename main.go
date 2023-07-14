@@ -7,8 +7,12 @@ import (
 	"car_repair_api_go/pkg/maintenances"
 	"car_repair_api_go/pkg/users"
 
+	"car_repair_api_go/docs"
+
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func main() {
@@ -41,6 +45,16 @@ func SetRouter() *gin.Engine {
             "dbUrl": dbUrl,
         })
     })
+
+	docs.SwaggerInfo.Title = "Car Repair API"
+	docs.SwaggerInfo.Description = "This is a car repair management API."
+	docs.SwaggerInfo.Version = "1.0"
+	docs.SwaggerInfo.Host = "petstore.swagger.io"
+	docs.SwaggerInfo.BasePath = "/v1"
+	docs.SwaggerInfo.Schemes = []string{"http", "https"}
+
+
+    router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
     return router
 }
