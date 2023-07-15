@@ -4,6 +4,7 @@ import (
 	"car_repair_api_go/pkg/auth"
 	"car_repair_api_go/pkg/cars"
 	"car_repair_api_go/pkg/common/db"
+	"car_repair_api_go/pkg/customers"
 	"car_repair_api_go/pkg/maintenances"
 	"car_repair_api_go/pkg/users"
 
@@ -39,6 +40,7 @@ func SetRouter() *gin.Engine {
     auth.RegisterRoutes(router, dbHandler)
     cars.RegisterRoutes(router, dbHandler)
     maintenances.RegisterRoutes(router, dbHandler)
+    customers.RegisterRoutes(router, dbHandler)
 
     router.GET("/", func(ctx *gin.Context) {
         ctx.JSON(200, gin.H{

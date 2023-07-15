@@ -20,6 +20,7 @@ func Init(url string) *gorm.DB {
     }
 
     db.AutoMigrate(&models.User{})
+    db.AutoMigrate(&models.Customer{})
     SetApiVersionCache()
 
     return db
