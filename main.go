@@ -30,17 +30,20 @@ func main() {
 }
 
 func SetRouter() *gin.Engine {
-
+    
+    // Initialize database
     dbUrl := viper.Get("DB_URL").(string)
-
-    router := gin.Default()
     dbHandler := db.Init(dbUrl)
 
-    users.RegisterRoutes(router, dbHandler)
-    auth.RegisterRoutes(router, dbHandler)
-    cars.RegisterRoutes(router, dbHandler)
-    maintenances.RegisterRoutes(router, dbHandler)
-    customers.RegisterRoutes(router, dbHandler)
+    router := gin.Default()
+    apiGroup := router.Group("/api")
+    v1Group := apiGroup.Group("/v1")
+
+    users.RegisterRoutes(v1Group, dbHandler)
+    auth.RegisterRoutes(v1Group, dbHandler)
+    cars.RegisterRoutes(v1Group, dbHandler)
+    maintenances.RegisterRoutes(v1Group, dbHandler)
+    customers.RegisterRoutes(v1Group, dbHandler)
 
     router.GET("/", func(ctx *gin.Context) {
         ctx.JSON(200, gin.H{
