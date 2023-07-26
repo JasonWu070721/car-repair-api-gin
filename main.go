@@ -7,6 +7,7 @@ import (
 	"car_repair_api_go/pkg/customers"
 	"car_repair_api_go/pkg/maintenances"
 	"car_repair_api_go/pkg/users"
+	"time"
 
 	"car_repair_api_go/docs"
 
@@ -41,8 +42,10 @@ func SetRouter() *gin.Engine {
     router.Use(cors.New(cors.Config{
         AllowOrigins:     []string{"*"},
         AllowMethods:     []string{"*"},
-        AllowHeaders:     []string{"Origin"},
-        ExposeHeaders:    []string{"Content-Length"},
+        AllowHeaders:     []string{"*"},
+        ExposeHeaders:    []string{"*"},
+        AllowCredentials: true,
+        MaxAge: 12 * time.Hour,
       }))
 
     apiGroup := router.Group("/api")
