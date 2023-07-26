@@ -14,6 +14,8 @@ import (
 	"github.com/spf13/viper"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+
+	"github.com/gin-contrib/cors"
 )
 
 func main() {
@@ -31,11 +33,18 @@ func main() {
 
 func SetRouter() *gin.Engine {
     
-    // Initialize database
     dbUrl := viper.Get("DB_URL").(string)
     dbHandler := db.Init(dbUrl)
 
     router := gin.Default()
+    
+    router.Use(cors.New(cors.Config{
+        AllowOrigins:     []string{"*"},
+        AllowMethods:     []string{"*"},
+        AllowHeaders:     []string{"Origin"},
+        ExposeHeaders:    []string{"Content-Length"},
+      }))
+
     apiGroup := router.Group("/api")
     v1Group := apiGroup.Group("/v1")
 
@@ -57,7 +66,6 @@ func SetRouter() *gin.Engine {
 	docs.SwaggerInfo.Host = "petstore.swagger.io"
 	docs.SwaggerInfo.BasePath = "/v1"
 	docs.SwaggerInfo.Schemes = []string{"http", "https"}
-
 
     router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
