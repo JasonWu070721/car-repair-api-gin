@@ -11,12 +11,11 @@ import (
 
 	"car_repair_api_go/docs"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/viper"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-
-	"github.com/gin-contrib/cors"
 )
 
 func main() {
@@ -29,7 +28,7 @@ func main() {
 
     router := SetRouter()
 
-    router.Run(port)
+    router.RunTLS(port, "./certs/gin.crt", "./certs/gin.key")
 }
 
 func SetRouter() *gin.Engine {
@@ -38,12 +37,14 @@ func SetRouter() *gin.Engine {
     dbHandler := db.Init(dbUrl)
 
     router := gin.Default()
+
+    // router.Use(cors.Default())
     
     router.Use(cors.New(cors.Config{
-        AllowOrigins:     []string{"*"},
-        AllowMethods:     []string{"*"},
-        AllowHeaders:     []string{"*"},
-        ExposeHeaders:    []string{"*"},
+        AllowOrigins:     []string{"https://localhost:3005"},
+        AllowMethods:     []string{"GET", "POST", "PUT"},
+        AllowHeaders:     []string{"Authorization", "Origin"},
+        ExposeHeaders:    []string{"Content-Length"},
         AllowCredentials: true,
         MaxAge: 12 * time.Hour,
       }))
