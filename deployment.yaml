@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: car-repair-api-deployment
+spec:
+  selector:
+    matchLabels:
+      app: car-repair-api
+  template:
+    metadata:
+      labels:
+        app: car-repair-api
+    spec:
+      containers:
+        - name: car-repair-api
+          image: car_repair_api:latest
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 3000
