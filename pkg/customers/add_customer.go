@@ -10,7 +10,6 @@ import (
 
 func (h handler) AddCustomer(ctx *gin.Context) {
     body := models.AddCustomerRequestBody{}
-
     if err := ctx.BindJSON(&body); err != nil {
         ctx.AbortWithError(http.StatusBadRequest, err)
         return
