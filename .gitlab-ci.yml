@@ -1,0 +1,32 @@
+image: mileschou/php-testing-base:7.0
+
+stages:
+  - build
+  - test
+  - deploy
+
+build_job:
+  stage: build
+  script:
+    - echo "hello world, build!"
+    - composer install
+  # cache:
+  #   untracked: true
+  # artifacts:
+  #   paths:
+  #     - vendor/
+
+test_job:
+  stage: test
+  script:
+    - echo "test"
+  # dependencies:
+  #   - build_job
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo Deploy OK
+  # only:
+  #   - release
+  # when: manual
