@@ -9,7 +9,7 @@ build_job:
   stage: build
   script:
     - echo "hello world, build!"
-    - composer install
+    # - composer install
   # cache:
   #   untracked: true
   # artifacts:
