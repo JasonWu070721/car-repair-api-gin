@@ -2,7 +2,7 @@
 version: "3.1"
 
 services:
-  postgresql:
+  car_repair_postgresql:
     image: postgres:latest
     restart: always
     environment:
@@ -11,19 +11,19 @@ services:
       POSTGRES_DB: admin
       PGDATA: /var/lib/postgresql/data/pgdata
     networks:
-      - backend-bridge
+      - car-repair-network
 
     volumes:
       - ~/car_repair_pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
-  redis:
+  car_repair_redis:
     image: redis:latest
     ports:
       - "6379:6379"
     networks:
-      - backend-bridge
+      - car-repair-network
     restart: always
 
   adminer:
@@ -43,10 +43,10 @@ services:
       - postgresql
       - redis
     networks:
-      - backend-bridge
+      - car-repair-network
     ports:
       - "443:443"
 
 networks:
-  backend-bridge:
+  car-repair-network:
     driver: bridge
