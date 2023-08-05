@@ -1,4 +1,7 @@
-# image: mileschou/php-testing-base:7.0
+image: docker
+
+services:
+  - docker:dind
 
 stages:
   - build
