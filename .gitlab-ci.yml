@@ -5,8 +5,7 @@ services:
 
 stages:
   - build
-  # - test
-  # - deploy
+  - publish
 
 build-docker-image:
   stage: build
@@ -14,30 +13,15 @@ build-docker-image:
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.gitlab.com
   script:
-    - docker build -t registry.gitlab.com/jasonwu070721/car_repair_api_gin .
-    - docker push registry.gitlab.com/jasonwu070721/car_repair_api_gin
-# build_job:
-#   stage: build
-#   script:
-#     - echo "hello world, build!"
-# - composer install
-# cache:
-#   untracked: true
-# artifacts:
-#   paths:
-#     - vendor/
+    - docker build -t $CI_REGISTRY_IMAGE:1.0.0-build$CI_PIPELINE_IID .
+    - docker tag $CI_REGISTRY_IMAGE:1.0.0-build$CI_PIPELINE_IID lastest
+    - docker images
 
-# test_job:
-#   stage: test
-#   script:
-#     - echo "test"
-#   # dependencies:
-#   #   - build_job
-
-# deploy_job:
-#   stage: deploy
-#   script:
-#     - echo Deploy OK
-# only:
-#   - release
-# when: manual
+push-to-registery:
+  stage: publish
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.gitlab.com
+  script:
+    - docker push $CI_REGISTRY_IMAGE:1.0.0-build$CI_PIPELINE_IID
+    - docker tag $CI_REGISTRY_IMAGE lastest
+    - docker images
