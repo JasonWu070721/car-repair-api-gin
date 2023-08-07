@@ -16,5 +16,5 @@ build-docker-image:
     - docker tag $CI_REGISTRY_IMAGE:1.0.0-build$CI_PIPELINE_IID lastest
     - docker images
     - docker push $CI_REGISTRY_IMAGE:1.0.0-build$CI_PIPELINE_IID
-    - docker push $CI_REGISTRY_IMAGE:lastest
+    # - docker push $CI_REGISTRY_IMAGE:lastest
 
