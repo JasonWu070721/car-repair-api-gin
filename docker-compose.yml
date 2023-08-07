@@ -30,18 +30,19 @@ services:
     image: adminer
     restart: always
     depends_on:
-      - postgresql
+      - car_repair_postgresql
     ports:
       - 8080:8080
 
   car_repair_api:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: $CI_REGISTRY_IMAGE:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     restart: always
     depends_on:
-      - postgresql
-      - redis
+      - car_repair_postgresql
+      - car_repair_redis
     networks:
       - car-repair-network
     ports:
