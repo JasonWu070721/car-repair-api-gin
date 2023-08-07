@@ -15,7 +15,7 @@ aws-ssh-login:
     - chmod 400 private_key.pem
   script:
     - scp -o StrictHostKeyChecking=no -i private_key.pem ./docker-compose.yml $AWS_USER@$AWS_SERVER:/home/ubuntu
-    - ssh -o StrictHostKeyChecking=no -i private_key.pem AWS_USER@$AWS_SERVER "ls -al"
+    - ssh -o StrictHostKeyChecking=no -i private_key.pem $AWS_USER@$AWS_SERVER "ls -al"
 
 run-main-process:
   stage: run
