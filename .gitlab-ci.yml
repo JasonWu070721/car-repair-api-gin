@@ -10,6 +10,7 @@ stages:
 aws-ssh-login:
   stage: aws_ssh
   before_script:
+    - echo $AWS_PRIVATE_KEY
     - cat $AWS_PRIVATE_KEY > private_key.pem
     - chmod 400 private_key.pem
   script:
