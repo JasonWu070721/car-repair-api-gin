@@ -35,7 +35,7 @@ services:
       - 8080:8080
 
   car_repair_api:
-    image: $CI_REGISTRY_IMAGE:latest
+    image: registry.gitlab.com/jasonwu070721/car_repair_api_gin:latest
     # build:
     #   context: .
     #   dockerfile: Dockerfile
