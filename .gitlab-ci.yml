@@ -9,9 +9,10 @@ stages:
 run-api:
   stage: run
   tags: 
-    - mypc
+    - aws
   before_script:
     - echo "before_script"
+    - docker ps
   script:
     - echo "script"
 
