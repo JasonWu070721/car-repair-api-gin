@@ -10,8 +10,8 @@ stages:
 aws-ssh-login:
   stage: aws_ssh
   before_script:
-    cat $AWS_PRIVATE_KEY > private_key.pem
-    chmod 400 private_key.pem
+    - cat $AWS_PRIVATE_KEY > private_key.pem
+    - chmod 400 private_key.pem
   script:
     - ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@ec2-3-27-121-199.ap-southeast-2.compute.amazonaws.com "ls -al"
 
