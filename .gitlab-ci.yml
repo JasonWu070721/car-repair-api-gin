@@ -8,7 +8,8 @@ stages:
 
 run-api:
   stage: run
-  tags: mypc
+  tags: 
+    - mypc
   before_script:
     - echo "before_script"
   script:
