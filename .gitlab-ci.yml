@@ -4,9 +4,17 @@ services:
   - docker:dind
 
 stages:
-  - push
+  - run
 
 build-push-image:
+  stage: run
+  tags: mypc
+  before_script:
+    - echo "before_script"
+  script:
+    - echo "script"
+
+.build-push-image:
   stage: push
 
   before_script:
