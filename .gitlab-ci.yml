@@ -38,6 +38,7 @@ build-push-image:
   before_script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD registry.gitlab.com
   script:
+    - ls -al
     - docker build -t $CI_REGISTRY_IMAGE:1.0.0-build$CI_PIPELINE_IID .
     - docker tag $CI_REGISTRY_IMAGE:1.0.0-build$CI_PIPELINE_IID $CI_REGISTRY_IMAGE:latest
     - docker images
