@@ -15,7 +15,7 @@ services:
 
     volumes:
       # - ~/car_repair_pgdata:/var/lib/postgresql/data
-      - ./db_init/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5432:5432"
 
