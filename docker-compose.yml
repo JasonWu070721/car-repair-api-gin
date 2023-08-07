@@ -15,6 +15,7 @@ services:
 
     volumes:
       - ~/car_repair_pgdata:/var/lib/postgresql/data
+      - ./db_init:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
 
@@ -35,7 +36,7 @@ services:
       - 8080:8080
 
   car_repair_api:
-    image: registry.gitlab.com/jasonwu070721/car_repair_api_gin:latest
+    image: registry.gitlab.c。om/jasonwu070721/car_repair_api_gin:latest
     # build:
     #   context: .
     #   dockerfile: Dockerfile
