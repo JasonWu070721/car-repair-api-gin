@@ -12,9 +12,9 @@ aws-ssh-login:
   script:
     - scp -o StrictHostKeyChecking=no -i private_key.pem ./docker-compose.yml $AWS_USER@$AWS_SERVER:/home/ubuntu
     - ssh -o StrictHostKeyChecking=no -i private_key.pem $AWS_USER@$AWS_SERVER "
-      ls -al
-      docker compose down
-      docker compose up -d
+      ls -al;
+      docker compose down;
+      docker compose up -d;
       "
 # run-main-process:
 #   stage: run
