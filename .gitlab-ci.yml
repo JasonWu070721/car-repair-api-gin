@@ -6,7 +6,7 @@ services:
 stages:
   - run
 
-build-push-image:
+run-api:
   stage: run
   tags: mypc
   before_script:
