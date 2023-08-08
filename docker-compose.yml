@@ -2,22 +2,22 @@
 version: "3.1"
 
 services:
-  car_repair_postgresql:
-    image: postgres:latest
-    restart: always
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: 1
-      POSTGRES_DB: admin
-      PGDATA: /var/lib/postgresql/data/pgdata
-    networks:
-      - car-repair-network
+  # car_repair_postgresql:
+  #   image: postgres:latest
+  #   restart: always
+  #   environment:
+  #     POSTGRES_USER: admin
+  #     POSTGRES_PASSWORD: 1
+  #     POSTGRES_DB: admin
+  #     PGDATA: /var/lib/postgresql/data/pgdata
+  #   networks:
+  #     - car-repair-network
 
-    volumes:
-      # - ~/car_repair_pgdata:/var/lib/postgresql/data
-      - ./db_init/init.sql:/docker-entrypoint-initdb.d/init.sql
-    ports:
-      - "5432:5432"
+  #   volumes:
+  #     # - ~/car_repair_pgdata:/var/lib/postgresql/data
+  #     - ./db_init/init.sql:/docker-entrypoint-initdb.d/init.sql
+  #   ports:
+  #     - "5432:5432"
 
   car_repair_redis:
     image: redis:latest
@@ -30,8 +30,8 @@ services:
   adminer:
     image: adminer
     restart: always
-    depends_on:
-      - car_repair_postgresql
+    # depends_on:
+    #   - car_repair_postgresql
     ports:
       - 8080:8080
 
@@ -42,7 +42,7 @@ services:
     #   dockerfile: Dockerfile
     restart: always
     depends_on:
-      - car_repair_postgresql
+      # - car_repair_postgresql
       - car_repair_redis
     networks:
       - car-repair-network
