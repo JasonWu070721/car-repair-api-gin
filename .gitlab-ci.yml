@@ -11,7 +11,7 @@ aws-ssh-login:
     - chmod 400 private_key.pem
   script:
     - scp -o StrictHostKeyChecking=no -i private_key.pem ./docker-compose.yml $AWS_USER@$AWS_SERVER:/home/ubuntu
-    - scp -o StrictHostKeyChecking=no -i private_key.pem -r ./db_init $AWS_USER@$AWS_SERVER:/home/ubuntu/db_init/
+    - scp -o StrictHostKeyChecking=no -i private_key.pem -r ./db_init $AWS_USER@$AWS_SERVER:/home/ubuntu/
     - ssh -o StrictHostKeyChecking=no -i private_key.pem $AWS_USER@$AWS_SERVER "
       ls -al;
       docker compose down;
