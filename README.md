@@ -2,6 +2,16 @@
 
 This API will help you store information about cars stored in your factory (repair shop).
 
+## Features
+
+- OS: Linux, Windows
+- Framework: Gin(Golang)
+- Database: PostgreSQL, Redis
+- protocol: RESTful API
+- Language: Golang, Python
+- Container: Docker
+- Cloud: AWS
+
 ## Quick start
 
 ### Docker
@@ -11,6 +21,7 @@ This API will help you store information about cars stored in your factory (repa
 ```shell script
 
 docker build -t car_repair_api .
+
 docker network create -d bridge car-repair-network
 
 docker run -p 6379:6379 --name car_repair_redis --network car-repair-network -d redis
@@ -24,6 +35,7 @@ docker run --name car_repair_api  --network car-repair-network -p 443:443 -d car
 
 ```shell script
 docker-compose down
+
 docker-compose up
 ```
 
