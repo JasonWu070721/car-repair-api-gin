@@ -6,9 +6,9 @@ services:
     image: postgres:latest
     restart: always
     environment:
-      POSTGRES_USER: admin
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: your_password
-      POSTGRES_DB: admin
+      POSTGRES_DB: car_repair
       PGDATA: /var/lib/postgresql/data/pgdata
     networks:
       - car-repair-network
