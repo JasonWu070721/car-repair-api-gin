@@ -1,25 +1,36 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
+
+type BaseModel struct {
+    ID           uint `gorm:"primarykey" json:"id"`
+    CreatedAt time.Time         `json:"created_at"`
+    UpdatedAt time.Time         `json:"updated_at"`
+    DeletedAt gorm.DeletedAt `gorm:"index" json:"deleted_at"`
+}
 
 type Customer struct {
-    gorm.Model
-    Name       string `json:"name"`
-    LicensePlate       string `json:"license_plate"`
-    CarColor       string `json:"car_color"`
-    CarYear        string `json:"car_year"`
+	BaseModel
+	Name         string         `json:"name"`
+	LicensePlate string         `json:"license_plate"`
+	CarColor     string         `json:"car_color"`
+	CarYear      string         `json:"car_year"`
 }
 
 type UpdateCustomerRequestBody struct {
-    Name       string `json:"name"`
-    LicensePlate       string `json:"license_plate"`
-    CarColor       string `json:"car_color"`
-    CarYear        string `json:"car_year"`
+	Name         string `json:"name"`
+	LicensePlate string `json:"license_plate"`
+	CarColor     string `json:"car_color"`
+	CarYear      string `json:"car_year"`
 }
 
 type AddCustomerRequestBody struct {
-    Name       string `json:"name"`
-    LicensePlate       string `json:"license_plate"`
-    CarColor       string `json:"car_color"`
-    CarYear        string `json:"car_year"`
+	Name         string `json:"name"`
+	LicensePlate string `json:"license_plate"`
+	CarColor     string `json:"car_color"`
+	CarYear      string `json:"car_year"`
 }
